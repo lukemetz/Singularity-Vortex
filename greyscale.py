@@ -12,7 +12,6 @@ def greyscale(imagefilepath):
 	b=numpy.matrix(b, dtype=int)
 	grey=(r+g+b)/3
 	save_image(grey,grey,grey)
-greyscale('bunny.jpg')
 	
 	
 

@@ -24,4 +24,4 @@ def color_balance(imagefilepath,channel,num):
 	g = numpy.clip(g,0,255)
 	b = numpy.clip(b,0,255)
 	save_image(r,b,g)
-color_balance('bunny.jpg',"red",100)
+

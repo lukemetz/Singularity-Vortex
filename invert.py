@@ -14,6 +14,5 @@ def invert(imagefilepath):
 	g=255-g
 	b=255-b
 	save_image(r,b,g)
-invert('bunny.jpg')
 
 	
