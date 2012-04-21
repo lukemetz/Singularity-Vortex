@@ -50,25 +50,48 @@ rotMat[3,3] = 1
 rotMat[4,4] = 1
 matrix = numpy.matrix(matrix)
 #matrix = numpy.zeros([5,7])
-mat2 = rotMat*matrix
+#mat2 = rotMat*matrix
+mat2 = matrix
+
 print mat2.shape
 print rotMat
 
 imageMat = numpy.zeros([maxSize[0],maxSize[1],3])
-#pdb.set_trace()
+
+
+from scipy.interpolate import griddata
+
+points = mat2[0:2].T
+values = mat2[2:5].T
+print points.shape
+print values
+xi = numpy.zeros([maxSize[0]*maxSize[1],2])
+count = 0
 for x in range(maxSize[0]):
 	for y in range(maxSize[1]):
-		print x, y
-		closest = mat2[0] # [x,y,r,g,b]
+		xi[count] = numpy.array([x,y])
+		count+=1
 
-		for i in range(maxSize[0]*maxSize[1]):
+#xi = numpy.meshgrid(numpy.arange(maxSize[0]), numpy.arange(maxSize[1]))
+print xi.shape
+data = griddata(points, values, xi, method='linear', fill_value=0)#numpy.array([0,0,0]))
+
+
+#pdb.set_trace()
+#for x in range(maxSize[0]):
+#	for y in range(maxSize[1]):
+#		print x, y
+#		closest = mat2[0] # [x,y,r,g,b]
+#
+#		for i in range(maxSize[0]*maxSize[1]):
 			#diff = (closest-mat[i])
 			#diff
-			if int(mat2[0,i]) == x and int(mat2[1,i])==y:
-				
-				imageMat[x,y,0] = mat2[2,i]
-				imageMat[x,y,1] = mat2[3,i]
-				imageMat[x,y,2] = mat2[4,i]
+#			if int(mat2[0,i]) == x and int(mat2[1,i])==y:
+#				
+#				imageMat[x,y,0] = mat2[2,i]
+#				imageMat[x,y,2] = mat2[4,i]
+
+
 
 
 #identity[1][50:100] = 1
@@ -91,7 +114,7 @@ array = numpy.array([imageMat])
 #pdb.set_trace()
 
 
-scipy.misc.imsave('bunnyout2.png', array)
+#scipy.misc.imsave('bunnyout2.png', array)
 
 
 #print array
