@@ -9,3 +9,9 @@ from colorbalance import *
 #imagefilepath,channel,num
 
 from greyscale import *
+
+from edgeDetection import *
+
+from Layers import *
+
+from invert import *
