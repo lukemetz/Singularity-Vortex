@@ -37,6 +37,3 @@ def flip(image, d):
 		#Flips Horizontally
 		bout= numpy.array([rM*iM, gM*iM, bM*iM])
 	return bout
-
-array= flip_Image("bunny.jpg",2)
-save_image(array[0], array[1], array[2])

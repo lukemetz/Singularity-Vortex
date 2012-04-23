@@ -2,6 +2,7 @@ from loadImage import *
 import numpy
 import scipy
 import pdb
+
 def greyscale(array):
 	colors=array
 	r=colors[0]

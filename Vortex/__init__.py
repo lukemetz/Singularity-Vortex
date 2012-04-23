@@ -1,12 +1,11 @@
-from load_image import*
+from loadImage import *
 # input: filepath
-from save_image import*
 # input: red, green, blue
-from applyTransformationMatrix import*
+from applyTransform import * 
 #array, transform, newSize=None
-from flip_Image import*
+from flip import *
 # inpus: filepath  and d where d==1 is vertical flip and d==2 is horizontal flip
-from color_balance import* 
+from colorbalance import * 
 #imagefilepath,channel,num
 
-
+from greyscale import *
