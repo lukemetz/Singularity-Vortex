@@ -2,8 +2,8 @@ from loadImage import *
 import numpy
 import scipy
 import pdb
-def color_balance(imagefilepath,channel,num):
-	colors=load_image(imagefilepath)
+def color_balance(array,channel,num):
+	colors=array
 	r=colors[0]
 	g=colors[1]
 	b=colors[2]
@@ -23,5 +23,5 @@ def color_balance(imagefilepath,channel,num):
 	r = numpy.clip(r,0,255)
 	g = numpy.clip(g,0,255)
 	b = numpy.clip(b,0,255)
-	save_image(r,b,g)
+	return [r, g, b] #save_image(r,b,g)
 

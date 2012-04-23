@@ -5,8 +5,12 @@ from PIL import Image
 import numpy
 import pdb
 
-def flip_Image(imageFilepath, d):
-
+def flip(image, d):
+	'''
+		flips image based on direction d. image is [rarray, garray, array]
+		
+	'''
+	bunny = image
 	bunny= load_image(imageFilepath)
 
 	red = bunny[0]

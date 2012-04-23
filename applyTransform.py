@@ -5,11 +5,12 @@ import numpy
 import math
 
 import pdb
-
+'''
 im = Image.open("smallbunny.jpg")
 array = scipy.misc.fromimage(im)
+'''
 
-def applyTransformationMatrix(array, transform, newSize=None):
+def apply_transformation_matrix(array, transform, newSize=None):
 	'''
 	applies a transformatrix matrix to an arrray. 
 	params:
@@ -74,7 +75,7 @@ def applyTransformationMatrix(array, transform, newSize=None):
 	array = numpy.array(imageMat)
 	return array
 	
-
+'''
 maxSize = array.shape
 offset = numpy.matrix([[1,0,-maxSize[0]/2],[0,1,-maxSize[1]/2],[0,0,1]])
 theta = -numpy.pi/4
@@ -87,5 +88,5 @@ array = applyTransformationMatrix(array, unOffset*rot*offset, numpy.array([200,2
 
 scipy.misc.imsave('bunnyout2.png', array)
 
-
+'''
 #print array

@@ -2,8 +2,8 @@ from loadImage import *
 import numpy
 import scipy
 import pdb
-def invert(imagefilepath):
-	colors=load_image(imagefilepath)
+def invert(array):
+	colors=array
 	r=colors[0]
 	g=colors[1]
 	b=colors[2]
@@ -13,6 +13,6 @@ def invert(imagefilepath):
 	r=255-r
 	g=255-g
 	b=255-b
-	save_image(r,b,g)
+	return [r, b, b] #save_image(r,b,g)
 
 	
