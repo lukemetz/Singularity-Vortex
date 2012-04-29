@@ -2,9 +2,11 @@ import Vortex
 
 orig = Vortex.load_image('muffin.jpg')
 
-a = Vortex.gaussiangBlur(orig, kernelSize=17, sigma=3)
+#a = Vortex.gaussiangBlur(orig, kernelSize=17, sigma=3)
 
-a = Vortex.sobelEdgeDetection(a)
-a = Vortex.invert(a)
-a = Vortex.add_layers(orig,a)
+#a = Vortex.sobelEdgeDetection(a)
+#a = Vortex.invert(a)
+#a = Vortex.add_layers(orig,a)
+
+Vortex.changeHue(orig, 30)
 Vortex.save_image(a, 'muffinout.jpg')

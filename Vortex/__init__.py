@@ -15,3 +15,5 @@ from edgeDetection import *
 from Layers import *
 
 from invert import *
+
+from color import *
