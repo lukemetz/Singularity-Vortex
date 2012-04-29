@@ -52,49 +52,38 @@ edge = numpy.clip(edge, 0, 255)
 save_image(edge, edge, edge)
 '''
 
-a= load_image('bunny.jpg')
-[r,g,b] = a
-sigma = 0.84089642*10
-#amp = 10
-n = 7
-kernelBlur = numpy.zeros([n,n])
-for xx in range(0,n):
-	for yy in range(0,n):
-		x = xx-n/2
-		y = yy-n/2
-		print x,y
-		kernelBlur[xx,yy] = 1/(numpy.pi*2*sigma)*numpy.exp(-(x**2+y**2)/(2*sigma**2))
-out = []
-#kernelBlur = numpy.array([[1,2,1],[0,0,0],[-1,-2,-1]])
-print kernelBlur
-for c in a:
-	y = convolve2d(c,kernelBlur)
-	out.append(y)
+def gaussiangBlur(array, kernelSize=5, sigma=0.84089642):
 
-save_image(out[0], out[1], out[2])
-#import sys
-#sys.exit()
-a = out
-kernelx = numpy.array([[-1,0,1],[-2,0,2],[-1,0,1]])
-kernely = numpy.array([[1,2,1],[0,0,0],[-1,-2,-1]])
-print kernely
-out = []
-for c in a:
-	y = convolve(c,kernely)#, mode='same')
-	x = convolve(c,kernelx)#, mode='same')
+	n = kernelSize
+	kernelBlur = numpy.zeros([n,n])
+	for xx in range(0,n):
+		for yy in range(0,n):
+			x = xx-n/2
+			y = yy-n/2
+			kernelBlur[xx,yy] = 1/(numpy.pi*2*sigma)*numpy.exp(-(x**2+y**2)/(2*sigma**2))
+	out = []
+	#kernelBlur = numpy.array([[1,2,1],[0,0,0],[-1,-2,-1]])
+	#print kernelBlur
+	for c in array:
+		y = convolve(c,kernelBlur, 'same')
+		out.append(y)
+	return out
 
-	arc = numpy.sqrt(x**2+y**2)
-	#print x, y
-	#arc = x
-	#arc = numpy.arctan2(y,x)
-	
-	#arc = numpy.clip(arc,-numpy.pi,numpy.pi)+numpy.pi
-	
-	#arc += arc.min()
-	#arc *= 255.0/arc.max()
-	numpy.clip(arc,0,255)
-	out.append(arc)
+def sobelEdgeDetection(array):
 
-#edge = numpy.clip(edge, 0, 255)
-edge = (out[0]+out[1]+out[2])/3
-save_image(edge, edge, edge)
+
+	kernelx = numpy.array([[-1,0,1],[-2,0,2],[-1,0,1]])
+	kernely = numpy.array([[1,2,1],[0,0,0],[-1,-2,-1]])
+	#print kernely
+	out = []
+	for c in array:
+		y = convolve(c,kernely,'same')#, mode='same')
+		x = convolve(c,kernelx,'same')#, mode='same')
+
+		arc = numpy.sqrt(x**2+y**2)
+		
+		numpy.clip(arc,0,255)
+		out.append(arc)
+
+	edge = (out[0]+out[1]+out[2])/3
+	return [edge, edge, edge]
