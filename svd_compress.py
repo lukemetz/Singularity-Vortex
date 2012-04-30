@@ -3,11 +3,11 @@ import scipy.linalg
 import numpy
 def SVD_compress(matrixlist,k):
 	#r=matrixlist[0]
-	#r=[[.5,.001],[.01,.1],[.7,.3],[.1,.03]]
-	r=matrixlist[0]/255.0
+	r=[[.5,.001],[.01,.1],[.7,.3],[.1,.03]]
+	#r=matrixlist[0]/255.0
 	g=matrixlist[1]/255.0
 	b=matrixlist[2]/255.0
-	
+	'''
 	import random
 	noise = numpy.zeros(r.shape)
 	print noise.shape
@@ -19,14 +19,14 @@ def SVD_compress(matrixlist,k):
 	r+= noise;
 	b+= noise
 	g+= noise;
-	#asdfasdf
+	#asdfasdf'''
 	def svd_for_one(r):
 		r=numpy.matrix(r)
 		rt=numpy.matrix(r.T)
 		RT=r*rt
 		R=rt*r
-		print RT
-		print R
+		#print RT
+		#print R
 		print numpy.linalg.det(RT)
 		[rvals1,rvects1]=scipy.linalg.eig(R)#At A
 		[rvals2,rvects2]=scipy.linalg.eig(RT) #A At
@@ -56,18 +56,22 @@ def SVD_compress(matrixlist,k):
 		U=rvects2
 		Vt=numpy.matrix(Vt)
 		U=numpy.matrix(U)
-
+		print Sig
+		print U
+		print Vt
 		svd=numpy.zeros(r.shape)
 		svd=numpy.matrix(svd)
-
+		
 		i=0
 		while i<k and i<Sig.shape[1]:
 			#svd=svd+Sig[i,i]*U[i,:]*Vt[:,i]
 			svd=svd+Sig[i,i]*U[:,i]*Vt[i,:]
 			i=i+1
-		print svd.shape
+		#print svd.shape
 		return svd
-   
+	svd_for_one(r)
+SVD_compress([1,1,1],100)
+'''   
 	r=svd_for_one(r)
 	g=svd_for_one(g)
 	b=svd_for_one(b)
@@ -79,10 +83,10 @@ def SVD_compress(matrixlist,k):
 	b=numpy.clip(b,0,255)
 	print r
 		
-	return [b,b,b]
+	return [r,g,b]
 
-matrixlist=v.load_image("smallbunny.jpg")
-array=SVD_compress(matrixlist,2)
-scipy.misc.imsave('bunnyout2.png', array)
+matrixlist=v.load_image("muffin.jpg")
+array=SVD_compress(matrixlist,100)
+scipy.misc.imsave('bunnyout2.png', array)'''
 	
 
