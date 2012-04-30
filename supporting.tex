@@ -48,9 +48,18 @@ Although these transformations work great in this format this is not the format 
 
 
 \subsection{Flipping}
-Another way to do manipulation of an image is via the Transpose...
+Another way to do manipulation of an image is via a rotated identity matrix. 
 
-EXPlAIN MORE HERE
+$A = \begin{pmatrix}
+	0 & 0 & 0 & 1\\
+	0 & 0 & 1 & 0\\
+	0 & 1 & 0 & 0\\
+	1 & 0 & 0 & 0\\
+\end{pmatrix}$
+
+One can then use this to flip an image both vertically and horizontally.
+If matrix $P$ is ones image, one can flip horizontally with:
+$A P$ and vertically with $P A$. 
 
 
 \subsection{Gaussian Blur}
