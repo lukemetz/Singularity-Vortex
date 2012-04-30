@@ -18,6 +18,14 @@ def apply_transformation_matrix(array, transform, newSize=None):
 		transformm: a 3x3 image. upper 2x2 box is rot and scale. left 2 column is transform. lower 3 should be 0,0,1
 		newSize: New size of the image. defaulted to original
 	'''
+	ar = array
+	array = numpy.zeros([array[0].shape[0], array[0].shape[1], 3])
+
+	array[:,:,0] = ar[0]
+	array[:,:,1] = ar[1]
+	array[:,:,2] = ar[2]
+
+	print array.shape
 
 	maxSize = array.shape
 	if newSize ==None:
@@ -65,7 +73,7 @@ def apply_transformation_matrix(array, transform, newSize=None):
 	points = points[0:2]
 
 	data = griddata(points.T, values, xi, method='linear', fill_value=0)#numpy.array([0,0,0]))
-
+	print data
 
 	imageMat = numpy.zeros([newSize[0], newSize[1],3])
 
@@ -73,6 +81,8 @@ def apply_transformation_matrix(array, transform, newSize=None):
 		imageMat[int(xi[p][0]),int(xi[p][1])] = data[p]
 
 	array = numpy.array(imageMat)
+
+
 	return array
 	
 '''
