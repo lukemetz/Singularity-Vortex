@@ -1,6 +1,8 @@
 \documentclass{beamer}
 \usetheme{default}
 \usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{gensymb}
 \begin{document}
 
 \begin{frame}{}
@@ -57,8 +59,78 @@ Images have 3 channels. Red, Blue, Green. To manipulate these arrays we chose to
 
 
 \begin{frame}{Transformations}
+To apply more complicated transformations to the image one first has to re arrange the image. Currently x and y position are stored at the index of the matrix. This gives us no easy way to manipulate them.
+
+We can rearrange The image to look like:
+$$A = \begin{pmatrix}
+	x & 0 & ...\\
+	y & 0 & ...\\
+	1 & 1 & ...\\
+	r &  255 & ...\\
+	g & 255 & ...\\
+	b & 255 & ...\\
+\end{pmatrix}$$
+This will let us translate, rotate, scale, and shear the image in any way.
 
 \end{frame}
+
+\begin{frame}{Rotation}
+Example Rotation:
+The Default rotation is always around the origin. To make that the center of the image, one must first translate, rotate, then translate back.
+\hspace{0.1 in}
+\\
+$A_{out} = \begin{pmatrix}
+	1 & 0 & dx\\
+	0 & 1 & dy\\
+	0 & 0 & 1\\
+\end{pmatrix}$
+$\begin{pmatrix}
+	\cos(\theta) & -\sin(\theta) & 0\\
+	\sin(\theta)& \cos(\theta) & 0\\
+	0 & 0 & 1\\
+\end{pmatrix}$
+$\begin{pmatrix}
+	1 & 0 & -dx\\
+	0 & 1 & -dy\\
+	0 & 0 & 1\\
+\end{pmatrix}$
+$A$
+\\
+\begin{figure}
+
+
+\includegraphics[width = 1.1 in]{bunnycute.jpg}
+\hspace{0.5 in}
+\includegraphics[width = 1.1 in]{bunnycuteRot.jpg}
+\caption{Rotated around the center at $\theta = 45\degree$}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}{Rotation}
+Example Rotation:
+The Default rotation is always around the origin. To make that the center of the image, one must first translate, rotate, then translate back.
+\hspace{0.1 in}
+\\
+$A_{out} = \begin{pmatrix}
+	1 & \lambda_y & 0\\
+	\lambda_x & 1 & 0\\
+	0 & 0 & 1\\
+\end{pmatrix}$
+$A$
+\\
+\begin{figure}
+
+\includegraphics[width = 1.1 in]{bunnycute.jpg}
+\hspace{0.5 in}
+\includegraphics[width = 1.1 in]{bunnycuteShear.jpg}
+\caption{Sheared with $\lambda_X = .4$ and $\lambda_Y = 0$}
+\end{figure}
+
+\end{frame}
+
+
+
 
 \begin{frame}{Convolution}
 'Blending' two functions together. For discrete data, its like overlapping.
@@ -145,7 +217,6 @@ One can combine these operations to find the major edges in an image.
 \hspace{.1in}
 \caption{No Blur, Blur, $\sigma = 2$, $\sigma = 4$}
 \end{figure}
-
 
 \end{frame}
 
