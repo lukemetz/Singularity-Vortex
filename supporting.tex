@@ -72,7 +72,7 @@ Where sigma is the standard deviation for the curve (how much blur to apply).
 
 To apply this function to the image we use convolution. Because we are using discrete data, we use a discrete convolution. To do this convolution we need to first choose a kernel size for our Gaussian function. The Gaussian function never goes to zero, it only crouches zero. A kernel that is the size of the image would be ideal, but it is unneeded because values further away from the 0,0 point are very close to zero. For our tests, we used kernel sizes of (5,5) to (21,21). These gave us good results. 
 
-2D convolution can be thought of as super imposing the kernel on top of the image and adding together each entry of the kernel multiplied by the original.
+2D convolution can be thought of as super imposing the flipped kernel on top of the image and adding together each entry of the kernel multiplied by the original.
 This graphic sums up the process.
 \begin{figure}[htp]
 \centering
