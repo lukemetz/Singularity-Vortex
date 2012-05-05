@@ -1,8 +1,10 @@
 \documentclass{beamer}
 \usetheme{default}
+
 \usepackage{subfigure}
 \usepackage{amsmath}
 \usepackage{gensymb}
+
 \begin{document}
 
 \begin{frame}{}
@@ -17,7 +19,11 @@ Chloe Eghtebas, Luke Metz, Brendan Ritter
 
 \begin{frame}{Basics of Image Processing}
 
-Using computational software to manipulate an image using signal processing techniques.
+Using computational software to manipulate an image using signal processing techniques. 
+
+It's applications: 
+Biomedical Imaging
+ Recognition and Tracking
 
 \end{frame}
 
@@ -26,9 +32,19 @@ Using computational software to manipulate an image using signal processing tech
 \begin{frame}{What You'll Need to Know}
 
 \begin{itemize}
+		
+	\item[1]Image Compression
 	\item SVD
-	\item Convolution
-	\item Gaussian blur
+	\item[2]"Signal Processing" 
+	\item Shear
+    \item brightness and contrast 
+    \item grayscale
+    \item invert
+    \item Rotating
+    	\item Flipping
+    \item[3]Edge Detection 
+    \item Gaussian blur
+    \item Sobel/convolution
 \end{itemize}
 \end{frame}
 
@@ -144,6 +160,7 @@ One has original data and a kernel which represents the other function.
 \end{frame}
 
 \begin{frame}{Gaussian Blur}
+
 Gaussian blur is an application of  convolution. It 'blends' a Gaussian, a normal curve onto the image. One has control over blurriness by the standard deviation, $\sigma$.
 
 %\begin{figure}[ht]
@@ -171,6 +188,7 @@ Gaussian blur is an application of  convolution. It 'blends' a Gaussian, a norma
 \includegraphics[width=1.3in]{churchoutblur2.jpg}
 \caption{Original image on left. $\sigma$ = 2 in middle. $\sigma$ = 4 on left.}
 \end{figure}
+
 
 \end{frame}
 
