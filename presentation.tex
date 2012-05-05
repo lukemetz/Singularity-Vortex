@@ -85,15 +85,82 @@ One has original data and a kernel which represents the other function.
 \end{frame}
 
 \begin{frame}{Gaussian Blur}
-Application of 
+
+Gaussian blur is an application of  convolution. It 'blends' a Gaussian, a normal curve onto the image. One has control over blurriness by the standard deviation, $\sigma$.
+
+%\begin{figure}[ht]
+%\begin{minipage}[b]{0.1\linewidth}
+%\centering
+%\includegraphics[width=1.3in]{churchin.jpg}
+%\caption{Default Image}
+%\label{fig:figure1}
+%\end{minipage}
+%\hspace{2.0in}
+%\begin{minipage}[b]{0.1\linewidth}
+%\centering
+%\includegraphics[width=1.3in]{churchoutb.jpg}
+%\caption{Blurred Image}
+%\hspace{1.0in}
+%\label{fig:figure2}
+%\end{minipage}
+%\end{figure}
+
+\begin{figure}[ht]
+\includegraphics[width=1.3in]{churchin.jpg}
+\hspace{.1in}
+\includegraphics[width=1.3in]{churchoutblur.jpg}
+\hspace{.1in}
+\includegraphics[width=1.3in]{churchoutblur2.jpg}
+\caption{Original image on left. $\sigma$ = 2 in middle. $\sigma$ = 4 on left.}
+\end{figure}
+
 
 \end{frame}
 
 \begin{frame}{Sobel Edge Detection}
+Another application of convolution is edge detection. The Sobel operator can be thought of as a discrete differentiation operator. It gets how fast one color goes to another. 
 
+\begin{figure}[ht]
+\includegraphics[width=1.4in]{churchin.jpg}
+\hspace{.1in}
+\includegraphics[width=1.4in]{churchout.jpg}
+\hspace{.1in}
+\end{figure}
 \end {frame}
 
+\begin{frame}{Sobel Kernel}
+The kernel used to create this edge detection is in two parts:
+
+
+$K_X = \begin{pmatrix}
+	-1 & 0 & 1\\
+	-2 & 0 & 2\\
+	-1 & 0 & 1\\
+\end{pmatrix}$
+$K_Y = \begin{pmatrix}
+	-1 & -2 & -1\\
+	0 & 0 & 0\\
+	1 & 2 & 1\\
+\end{pmatrix}$
+
+\vspace{.4in}
+$E = \sqrt(E_Y^2+E_Y^2)$ Where $E_X$ and $E_Y$ are the result of the convolution.
+
+\end{frame}
+
 \begin{frame}{Blur + Edge Detection}
+One can combine these operations to find the major edges in an image.
+
+\begin{figure}[ht]
+\includegraphics[width=1.3in]{churchout.jpg}
+\hspace{.1in} 
+\includegraphics[width=1.3in]{churchoutbluredge.jpg}
+\hspace{.1in}
+\includegraphics[width=1.3in]{churchoutblur2edge.jpg}
+\hspace{.1in}
+\caption{No Blur, Blur, $\sigma = 2$, $\sigma = 4$}
+\end{figure}
+
 
 \end{frame}
 
