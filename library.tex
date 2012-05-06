@@ -1,0 +1,62 @@
+\documentclass[11pt]{article}
+%Gummi|063|=)
+\title{\textbf{Python Library: Image Processing}}
+\author{}
+\date{}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\begin{document}
+\maketitle
+
+\section{Goals}
+We wanted to create a library that one could quickly and easily apply filters and effects to an image and chain these operations together. The setup of our library is that each function takes in a array of matrices representing r,g,b. A similar array is also returned from each function.
+
+\section{Functions}
+\begin{verbatim}
+apply_transformation_matrix(array, transform, newSize=None)
+\end{verbatim}
+Applies a transformation matrix to the image.
+\begin{verbatim}
+gaussiangBlur(array, kernelSize=5, sigma=0.84089642)
+\end{verbatim}
+Applies Gaussian blur to the the image. sigma is the standard deviation of the curve. KernelSize is the size of points to sample around.
+\begin{verbatim}
+sobelEdgeDetection(array)
+\end{verbatim}
+Returns a grayscale representing edges. Edge detection uses the sobel operator.
+\begin{verbatim}
+flip(image, d)
+\end{verbatim}
+Flips a image around a direction specified by d. If d is 1, it flips vertically. If d is 2 it flips horizontally.
+CHECK ME
+
+\begin{verbatim}
+greyscale(array)
+\end{verbatim}
+Converts the image into a gray scale. 
+\begin{verbatim}
+invert(array)
+\end{verbatim}
+Inverts each color channel in the image. 
+
+\begin{verbatim}
+load_image(imagefilepath)
+\end{verbatim}
+
+Load image into a array of r,g,b matrices. 
+
+\begin{verbatim}
+save_image(array, filename)
+\end{verbatim}
+
+Saves the image array into the specified file name.
+
+\begin{verbatim}
+color_balance(array,channel,num)
+\end{verbatim}
+Channel is 'red', 'green', 'blue', or 'all' and num is the amount to add to that channel.
+
+
+
+
+\end{document}
