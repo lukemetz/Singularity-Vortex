@@ -70,17 +70,24 @@ Images have 3 channels. Red, Blue, Green. To manipulate these arrays we chose to
 
 
 \begin{frame}{Flipping}
-
+To flip our images, we took our 3 large matrices, rgb, and multiplied them by a matrix like the one bellow except the right size.
+$A = \begin{pmatrix}
+	0 & 0 & 0 & 1\\
+	0 & 0 & 1 & 0\\
+	0 & 1 & 0 & 0\\
+	1 & 0 & 0 & 0\\
+\end{pmatrix}$
+To flip horizontally, one can multiply $AI$. To flip vertically, one can $IA$.
 
 \begin{figure}
-\includegraphics[width = 1.25 in]{lennastory.jpg}
-
+\includegraphics[width = 0.9 in]{lenna1.png}
 \hspace{0.5 in}
-\includegraphics[width = 1.25 in]{lenna1.png}
+\includegraphics[width = 0.9 in]{lenna1.png}
 \hspace{0.5 in}
-\includegraphics[width = 1.25 in]{lenna2.png}
-\hspace{0.5 in}
+\includegraphics[width = 0.9 in]{lenna2.png}
+\caption{Original Image, flipped vertically, flipped horizontally.}
 \end{figure}
+
 
 \end{frame}
 

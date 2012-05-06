@@ -47,6 +47,7 @@ a = Vortex.apply_transformation_matrix(orig, unOffset*rot*offset)
 
 Vortex.save_image(a, 'bunnycuteRot.jpg')
 '''
+'''
 a = Vortex.load_image('parrot.jpg')
 a = Vortex.color_balance(a,'red',90)
 a = Vortex.color_balance(a,'blue',-90)
@@ -59,7 +60,12 @@ a = Vortex.color_balance(a,'all',-100)
 
 Vortex.save_image(a, 'parrotout2.jpg')
 
+'''
 
+
+orig = Vortex.load_image('churchin.jpg')
+a = Vortex.laplaceEdgeDetection(orig)
+Vortex.save_image(a, 'churchoutlaplace.jpg')
 
 #a = Vortex.invert(a)
 #a = Vortex.add_layers(orig,a)
