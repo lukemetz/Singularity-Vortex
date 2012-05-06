@@ -87,3 +87,18 @@ def sobelEdgeDetection(array):
 
 	edge = (out[0]+out[1]+out[2])/3
 	return [edge, edge, edge]
+
+
+def laplaceEdgeDetection(array):
+
+	kernel = numpy.array([[-1,-1,-1],[-1,8,-1],[-1,-1,-1]])
+
+	#kernelBlur = numpy.array([[1,2,1],[0,0,0],[-1,-2,-1]])
+	#print kernelBlur
+	out = []
+	for c in array:
+		y = convolve(c,kernel, 'same')
+		out.append(y)
+	edge = numpy.clip(((out[0]+out[1]+out[2])/3-(255/2))*1+(255/2),0,255)
+	edge = numpy.clip((out[0]+out[1]+out[2])/3,0,255)
+	return [edge, edge, edge]
