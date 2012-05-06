@@ -10,7 +10,7 @@
 \maketitle
 
 \section{Abstract}
-Our group chose to use our existing knowledge of linear algebra and apply it to the field of linear algebra. We chose to package our end result as a simple python module. Our system can apply linear transformations to the image, rotate, scale. Our system can do convolution based operations, Sobel edge detection, Gauss blur. We also have various color manipulating functions, saturation, brightness, grayscale.
+Our group chose to use our existing knowledge of linear algebra and apply it to the field of image processing We chose to package our end result as a simple python module. Our system can apply a linear transformation(s) to and image of any size. It is capable of rotating, scaling and other simple manipulations. In addition, our system can do convolution based operations like Sobel edge detection, Laplacian edge detection and Gauss blur. We also have various color manipulating functions like saturation, brightness and grayscale adjustment.
 
 \section{Functionality}
 \subsection{Translation Matrix}
@@ -63,12 +63,12 @@ $A P$ and vertically with $P A$.
 
 
 \subsection{Gaussian Blur}
-A Gaussian function is simply just a normal distributions. This function is defined by:
+A Gaussian function is simply just a normal distribution. This function is defined by:
 
 $$
 G(x,y) = \dfrac{1}{2\pi \sigma^2}e^{-\dfrac{x^2+y^2}{2 \sigma^2}}$$
 
-Where sigma is the standard deviation for the curve (how much blur to apply). 
+Where sigma is the standard deviation for the curve, which in this application is how much blur to apply.
 
 To apply this function to the image we use convolution. Because we are using discrete data, we use a discrete convolution. To do this convolution we need to first choose a kernel size for our Gaussian function. The Gaussian function never goes to zero, it only crouches zero. A kernel that is the size of the image would be ideal, but it is unneeded because values further away from the 0,0 point are very close to zero. For our tests, we used kernel sizes of (5,5) to (21,21). These gave us good results. 
 
@@ -105,21 +105,20 @@ Edge detection is simply finding where the rate of change between different colo
 Another interesting thing to note about edge detection is that one can tune how small the edges should be. This can be done by applying a Gaussian blur before this filter.
 
 \subsection{Color Transformation}
-Our images are made up of three channels, red, green, and blue. One can manipulate these channels to change how the colors are represented. For example, to output a gray scale, one can simply average all three channels and output 3 of that average.
+Our images are made up of three channels, red, green, and blue. One can manipulate these channels to change how the colors are represented. For example, to output a gray scale, one can simply average all three channels and output 3 of that average for all red, green and blue channels.
 
 To increase or decrease the brightness, one can multiply by a some constant. If this constant is greater than one, the image becomes brighter. If it is less, the image becomes darker. 
 
 To invert the image, one can subtract each channel from the max value, in our case, 255.
 
 
-HUE SATURATION HERE IF POOSSIBLe
 
-
-\subsection{SVD??}
 
 
 \section{Conclusion}
-More here.... Do we need this section?
+Some further work that we could implement would be different image compressions, corner detection, changing color standards (rgb to cmyk), or hue rotation. In additon, we could have implemented further photoshop like
+functions like layers or only changing select parts of the image rather than the whole thing.
+
 
 
 \end{document}
