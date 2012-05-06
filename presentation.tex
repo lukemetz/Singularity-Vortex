@@ -247,11 +247,26 @@ $K_Y = \begin{pmatrix}
 
 \vspace{.4in}
 $E = \sqrt(E_Y^2+E_Y^2)$ Where $E_X$ and $E_Y$ are the result of the convolution.
+\end{frame}
+
+\begin{frame}{Laplacian kernel}
+A discrete Laplacian kernel can also be used to do edge de tection. 
+$K_L = \begin{pmatrix}
+	-1 & -1 & -1\\
+	-1 & 8 & -1\\
+	-1 & -1 & -1\\
+\end{pmatrix}$
+\begin{figure}[ht]
+\includegraphics[width=1.4in]{churchin.jpg}
+\hspace{.1in}
+\includegraphics[width=1.4in]{churchoutlaplace.jpg}
+\hspace{.1in}
+\end{figure}
 
 \end{frame}
 
 \begin{frame}{Blur + Edge Detection}
-One can combine these operations to find the major edges in an image.
+One can combine these operations to find the major edges in an image. Bellow are using sobel edge detection.
 
 \begin{figure}[ht]
 \includegraphics[width=1.3in]{churchout.jpg}
