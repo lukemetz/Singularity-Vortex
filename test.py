@@ -31,8 +31,7 @@ Vortex.save_image(a, 'churchoutblur2edge.jpg')
 
 #a = Vortex.sobelEdgeDetection(a)
 #Vortex.save_image(a, 'churchoutbluredge.jpg')
-
-
+'''
 orig = Vortex.load_image('bunnycute.jpg')
 
 print orig
@@ -47,6 +46,19 @@ unOffset = numpy.matrix([[1,0,maxSize[0]/2],[0,1,maxSize[1]/2],[0,0,1]])
 a = Vortex.apply_transformation_matrix(orig, unOffset*rot*offset)
 
 Vortex.save_image(a, 'bunnycuteRot.jpg')
+'''
+a = Vortex.load_image('parrot.jpg')
+a = Vortex.color_balance(a,'red',90)
+a = Vortex.color_balance(a,'blue',-90)
+a = Vortex.color_balance(a,'green',-90)
+
+Vortex.save_image(a, 'parrotout1.jpg')
+
+a = Vortex.load_image('parrot.jpg')
+a = Vortex.color_balance(a,'all',-100)
+
+Vortex.save_image(a, 'parrotout2.jpg')
+
 
 
 #a = Vortex.invert(a)
