@@ -104,6 +104,15 @@ Edge detection is simply finding where the rate of change between different colo
 
 Another interesting thing to note about edge detection is that one can tune how small the edges should be. This can be done by applying a Gaussian blur before this filter.
 
+\subsection{Laplacian edge detection}
+Another way to detect edges in an image is via the laplacian. 
+To do this, we used the following discrete kernel:
+$\begin{pmatrix}
+	-1 & -1 & -1\\
+	-1 & 8 & -1\\
+	-1 & -1 & -1\\
+\end{pmatrix}$
+
 \subsection{Color Transformation}
 Our images are made up of three channels, red, green, and blue. One can manipulate these channels to change how the colors are represented. For example, to output a gray scale, one can simply average all three channels and output 3 of that average for all red, green and blue channels.
 
@@ -119,15 +128,22 @@ To invert the image, one can subtract each channel from the max value, in our ca
 Some further work that we could implement would be different image compressions, corner detection, changing color standards (rgb to cmyk), or hue rotation. In additon, we could have implemented further photoshop like
 functions like layers or only changing select parts of the image rather than the whole thing.
 
+\section{Annotated bibliography}
+http://www.dreamstime.com/royalty-free-stock-photography-old-european-church-image6109687
+http://amazing-creature.blogspot.com/2011/08/20-cute-bunny-pictures.html
+%http://blog.lib.umn.edu/cgi-bin/mt-search.cgi?blog_id=15490&tag=bird%20language%20communication%20name%20names%20song%20songs%20parrot%20parrots%20finch%20finches&limit=10
 
+http://www.math.ucf.edu/~xli/ConvolutionInImageProcessing2011print.pdf
+
+Wikipedia:
+convolution
+sobel
+laplacian
+gaussian
 
 \end{document}
 
 
-%http://www.dreamstime.com/royalty-free-stock-photography-old-european-church-image6109687
-%http://amazing-creature.blogspot.com/2011/08/20-cute-bunny-pictures.html
-%http://blog.lib.umn.edu/cgi-bin/mt-search.cgi?blog_id=15490&tag=bird%20language%20communication%20name%20names%20song%20songs%20parrot%20parrots%20finch%20finches&limit=10
 
-%http://www.math.ucf.edu/~xli/ConvolutionInImageProcessing2011print.pdf
 
 
