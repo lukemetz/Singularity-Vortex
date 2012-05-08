@@ -102,12 +102,12 @@ To apply more complicated transformations to the image one first has to re arran
 
 We can rearrange The image to look like:
 $$A = \begin{pmatrix}
-	x & 0 & ...\\
-	y & 0 & ...\\
-	1 & 1 & ...\\
-	r &  255 & ...\\
-	g & 255 & ...\\
-	b & 255 & ...\\
+	x & 0 & 1 &...\\
+	y & 0 & 0 &...\\
+	1 & 1 &  1 &...\\
+	r &  255 & 255 &...\\
+	g & 255 & 255 &...\\
+	b & 255 & 255 &...\\
 \end{pmatrix}$$
 This will let us translate, rotate, scale, and shear the image in any way.
 
@@ -146,9 +146,9 @@ $A$
 \end{frame}
 
 
-\begin{frame}{Rotation}
-Example Rotation:
-The Default rotation is always around the origin. To make that the center of the image, one must first translate, rotate, then translate back.
+\begin{frame}{Shear}
+Example Shear:
+
 \hspace{0.1 in}
 \\
 $A_{out} = \begin{pmatrix}
