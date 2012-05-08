@@ -1,0 +1,48 @@
+NOTES
+
+Talk about effect of convoling around sobel what does it do
+
+Blur first sobel second
+
+Weird space in detection
+
+More math in presentation
+
+What is the A matrix. Show the path
+
+Tell what dx dy are. Check the direction of them.
+
+More detail about convolution
+
+Talk more about sobel kernel.
+
+
+Show what happens to convole. Convolve against matrix of nxm size.
+Use .^Squared to show squaring eliment wise. 
+
+Look at Ex and Ey separately to show edges in both directions.
+
+Then show combined.
+
+
+We are regarding images as vectors. Convoluting against the kernel is a linear transformation. What is the null space why do we see what we see.
+
+Edge detection all alot of black and white. Why is there not alot of gray. 
+
+What is this doing in the frequency domain. How the filter is acting.
+
+What are the eigen vectors of this filter. What are the eigen values
+
+Talk about linear operators. Think about eigen values and eigen vectors of the operator convolution kx and ky. Not just thinking about matrixies. 
+
+Loosing information, nullspace? Or eigen values are are large. 
+Effective nullspace is almost zero.
+
+Eigen values close to zero, getting rid. Egien values close to 1, retaining information. 
+
+VAlues capped 0-255. Fairly close to vector space. 
+
+Show mod 255 space. Vector space over the feild of 255 elements. 
+
+Every time do something, think about the image as a vector. Think about it as a transformation. 
+
