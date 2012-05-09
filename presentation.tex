@@ -82,7 +82,7 @@ $A = \begin{pmatrix}
 	0 & 1 & 0 & 0\\
 	1 & 0 & 0 & 0\\
 \end{pmatrix}$
-To flip horizontally, one can multiply $AI$. To flip vertically, one can $IA$.
+To flip horizontally, one can multiply $AC$. To flip vertically, one can $CA$. Where C is the image matrix.
 
 \begin{figure}
 \includegraphics[width = 0.9 in]{lennastory.jpg}
@@ -199,19 +199,19 @@ Same priciple for discreate convolution. It's like overlapping one signal with a
 \end{frame}
 
 \begin{frame} {Convolution in 1d}
-In 1d, one can think of super imposing the kernel over each point ofl data.
+In 1D, one can think of superimposing the kernel over each point of data.
 $$A = (0,2,3,1,2,1,0)$$
 $$K = (1,1,1)$$ 
-$$O = A*K = (2,5,6,6,4,3,1)$$
+$$S = AK = (2,5,6,6,4,3,1)$$
 
-Or Mathematically for a kernel of size 3, $O_n = A_{n-1}*K_{0}+A_{n}*K_{1}+A_{n+1}*K_{2}$
+Or Mathematically for a kernel of size 3, $S_n = A_{n-1}K_{0}+A_{n}K_{1}+A_{n+1}K_{2}$
 
 Because our vectors are not infinite, we have to decide what happens on the edges. We will assume that the $A_{-1} = A_{n-1}$ where n is the size of the vector.
 \end{frame}
 
 
 \begin{frame}{Multiplying Matrices}
-Convolution around a kernel is a linear operator, thus one can find a matrix, $C$, that transforms A to O. $CA=O=A*K$.
+Convolution around a kernel is a linear operator, thus one can find a matrix, $C$, that transforms A to S. $CA=S=AK$.
 
 $C = \begin{pmatrix}
 	1 & 1 & 0 & 0 & 0 & 0 & 1\\
@@ -228,7 +228,7 @@ This matrix is in the form of a Circulant matrix. Matrices in this form are easy
 \end{frame}
 
 
-\begin{frame}{Eigen Things}
+\begin{frame}{Eigenthings}
 Because this matrix is Circulant, its eigenvectors and values are easy to find. 
 Assuming the following circulant matrix, 
 $$\begin{matrix}
@@ -247,7 +247,7 @@ $$w_j = e^{\dfrac{2\pi i j}{n}}$$
 
 \end{frame}
 
-\begin{frame}{Eigen Things, cont}
+\begin{frame}{Eigenthings Cont.}
 For our demo kernel,
 $$\lambda_j = 1+e^{\dfrac{2\pi i j}{n}}+e^{\dfrac{(n-1)\pi i j}{n}}$$
 
@@ -257,7 +257,7 @@ Using eulers formula
 $$\lambda_j = 1+2\cos(\dfrac{2\pi j}{n})$$
 $$\lambda_{0} = 3$$ is the maximum eigenvalues.
 This value corresponds to $v_0 = (1,1,1,1,1...)$.
-Take for example $\lambda_{n/2} = -1$.  $v_{n/2} = (1,-1,-1,1,-1...)$.
+Take for example $\lambda_{n/2} = -1$.  $v_{n/2} = (1,-1,1,-1,1...)$.
 
 \end{frame}
 
@@ -350,12 +350,12 @@ Another application of convolution is edge detection. The Sobel operator can be 
 \begin{frame}{Sobel Kernel}
 The kernel used to create this edge detection is in two parts:\newline
 
-$K_X = \begin{pmatrix}
+$G_X = \begin{pmatrix}
 	-1 & 0 & 1\\
 	-2 & 0 & 2\\
 	-1 & 0 & 1\\
 \end{pmatrix}$
-$K_Y = \begin{pmatrix}
+$G_Y = \begin{pmatrix}
 	-1 & -2 & -1\\
 	0 & 0 & 0\\
 	1 & 2 & 1\\
@@ -365,7 +365,7 @@ Where $G_{x}$ is how quickly the colors change in the x direction and $G_{y}$ is
 %\vspace{.4in}
 \newline
 
-$E = \sqrt(E_Y^2+E_Y^2)$ Where $E_X$ and $E_Y$ are the result of the convolution.
+Where the output of the convolutions combined (by taking the magnitude)is the edge detected image.  
 \end{frame}
 
 \begin{frame}{Example of $G_{x}$ and $G_{y}$ Output}
@@ -410,21 +410,23 @@ $$v_{n/2} = (1,-1,1,-1, ...)$$
 
 This makes a lot of sense when thinking about what edge detection does. It looks to places with very large, fast, high frequency changes in color and keeps those. It lowers all parts that are at low frequency, j=0, $\lambda_j = 0$, $v_0 = (1,1,1,1,...)$
 
+Another interesting note here, is the nullspace. The nullspace of this operator is a image with no edges, or just a flat image. 
+
 \end{frame}
 
-\begin{frame}{Blur + Edge Detection}
-One can combine these operations to find the major edges in an image. Bellow are using Sobel edge detection.
+%\begin{frame}{Blur + Edge Detection}
+%One can combine these operations to find the major edges in an image. Bellow are using Sobel edge detection.
 
-\begin{figure}[ht]
-\includegraphics[width=1.3in]{churchout.jpg}
-\hspace{.1in} 
-\includegraphics[width=1.3in]{churchoutbluredge.jpg}
-\hspace{.1in}
-\includegraphics[width=1.3in]{churchoutblur2edge.jpg}
-\hspace{.1in}
-\caption{No Blur, Blur, $\sigma = 2$, $\sigma = 4$}
-\end{figure}
-\end{frame}
+%\begin{figure}[ht]
+%\includegraphics[width=1.3in]{churchout.jpg}
+%\hspace{.1in} 
+%\includegraphics[width=1.3in]{churchoutbluredge.jpg}
+%\hspace{.1in}
+%\includegraphics[width=1.3in]{churchoutblur2edge.jpg}
+%\hspace{.1in}
+%\caption{No Blur, Blur, $\sigma = 2$, $\sigma = 4$}
+%\end{figure}
+%\end{frame}
 
 \begin{frame}{Questions}
 Hope you enjoyed our presentation. 
@@ -435,4 +437,3 @@ Any questions?
 
 
 \end{document}
-a
