@@ -183,27 +183,22 @@ Our next feature that we implemented was color controls per channel. This would 
 \end{figure}
 \end{frame}
 
-\begin{frame}{Convolution}
-'Blending' two functions together. For discrete data, its like overlapping.
-One has original data and a kernel which represents the other function. 
-
-
-\end{frame}
 
 \begin{frame} {Convolution in 1d}
-In 1d, one can think of super imposing the kernel over each point of data.
+'Blending' two functions together. In 1d, one can think of super imposing the kernel over each point of data.
+
 $$A = (0,2,3,1,2,1,0)$$
 $$K = (1,1,1)$$ 
-$$O = A*K = (2,5,6,6,4,3,1)$$
+$$S = A*K = (2,5,6,6,4,3,1)$$
 
-Or Mathematically for a kernel of size 3, $O_n = A_{n-1}*K_{0}+A_{n}*K_{1}+A_{n+1}*K_{2}$
+Or Mathematically for a kernel of size 3, $S_n = A_{n-1}K_{0}+A_{n}K_{1}+A_{n+1}K_{2}$
 
 Because our vectors are not infinite, we have to decide what happens on the edges. We will assume that the $A_{-1} = A_{n-1}$ where n is the size of the vector.
 \end{frame}
 
 
 \begin{frame}{Multiplying Matrices}
-Convolution around a kernel is a linear operator, thus one can find a matrix, $C$, that transforms A to O. $CA=O=A*K$.
+Convolution around a kernel is a linear operator, thus one can find a matrix, $C$, that transforms A to S. $CA=S=A*K$.
 
 $C = \begin{pmatrix}
 	1 & 1 & 0 & 0 & 0 & 0 & 1\\
@@ -221,7 +216,7 @@ This matrix is in the form of a Circulant matrix. Matrices in this form are easy
 
 
 \begin{frame}{Eigen Things}
-Because this matrix is Circulant, its eigen vectors and values are easy to find. 
+Because this matrix is Circulant, its eigenvectors and values are easy to find. 
 Assuming the following circulant matrix, 
 $$\begin{matrix}
 	c_0 & c_{n-1} & \cdots & c_2 & c_1\\
@@ -230,11 +225,11 @@ $$\begin{matrix}
 	c_{n-2} &   & \ddots & \ddots & c_{n-1}\\
 	c_{n-1} & c_{n-2} & \cdots & c_1 & c_0\\
 \end{matrix}$$
-The eigen values and vectors are:
-$$\lambda_j =c_0+c_{n-1}w_j	+c_{n-2}w_j^2+...+c_{1}w_j{n-1}2$$
+The eigenvalues and vectors are:
+$$\lambda_j =c_0+c_{n-1}w_j	+c_{n-2}w_j^2+...+c_{1}w_j^{n-1}$$
 $$v_j = (1, w_j, w_j^2, w_j^3, ..., w_j^{n-1})$$
 
-Where $w$ are the roots of unity, $z^n = 1$ or 
+Where $w$ are the roots of unity,
 $$w_j = e^{\dfrac{2\pi i j}{n}}$$
 
 \end{frame}
@@ -243,18 +238,18 @@ $$w_j = e^{\dfrac{2\pi i j}{n}}$$
 For our demo kernel,
 $$\lambda_j = 1+e^{\dfrac{2\pi i j}{n}}+e^{\dfrac{(n-1)\pi i j}{n}}$$
 
-we can say $(n-1) = -1$ to simplify because we multiplying by $2\pi$. Thus   
+we can say $(n-1) = -1$ to because this is periodic   
 $$\lambda_j = 1+e^{\dfrac{2\pi i j}{n}}+e^{\dfrac{-\pi i j}{n}}$$
 Using eulers formula
 $$\lambda_j = 1+2\cos(\dfrac{2\pi j}{n})$$
-$$\lambda_{0} = 3$$ is the maximum eigen value.
+$$\lambda_{0} = 3$$ is the maximum eigenvalue.
 This value corresponds to $v_0 = (1,1,1,1,1...)$.
-Take for example $\lambda_{n/2} = -1$.  $v_{n/2} = (1,-1,-1,1,-1...)$.
+Take for example $\lambda_{n/2} = -1$.  $v_{n/2} = (1,-1,1,-1,-1...)$.
 
 \end{frame}
 
 \begin{frame}{What this Means?}
-One can look at this filter and see that it is a form of blur. It takes the two values next to a point and adds them.  This also multiplies the magnitude of the list by 3, hence an eigen value of 3. This eigen value coresponds to a very low frequency. The smallest eigen values, $\lambda_{n/2} = -1$ corresponds to the highest frequency. The blur is passing through low frequencies and reducing high frequencies.
+One can look at this filter and see that it is a form of blur. It takes the two values next to a point and adds them.  This also multiplies the magnitude of the list by 3, hence an eigenvalue of 3. This eigenvalue coresponds to a very low frequency. The smallest eigenvalues, $\lambda_{n/2} = -1$ corresponds to the highest frequency. The blur is passing through low frequencies and reducing high frequencies.
 \end{frame}
 
 \begin{frame}{Convolution in 2d}
@@ -313,8 +308,8 @@ $$ G(x) = \dfrac{1}{\sqrt{2\pi \sigma^2}}e^{\dfrac{-x^2}{2\sigma^2}}$$
 \end{frame}
 
 
-\begin{frame} {Eigen values}
-Because this kernel also preforms a form of bluring operation, and is of a similar form as the blur above, we know that its dominant eigen value is $\lambda_0$ which corresponds to a low frequency. And low eigen values, $\lambda_{n/2}$ corresponds to high frequency.
+\begin{frame} {eigenvalues}
+Because this kernel also preforms a form of bluring operation, and is of a similar form as the blur above, we know that its dominant eigenvalue is $\lambda_0$ which corresponds to a low frequency. And low eigenvalues, $\lambda_{n/2}$ corresponds to high frequency.
 \end{frame}
 
 
@@ -388,8 +383,28 @@ $K_L = \begin{pmatrix}
 
 \end{frame}
 
+
+\begin{frame}{Laplacian in 1d}
+\begin{figure}[ht]
+\includegraphics[width=3in]{discreteLaplacian.png}
+\end{figure}
+This creates a kernel that is [1,-2,1].
+\end{frame}
+
+\begin{frame}{eigenvalues of this}
+When solving for eigenvalues of this one gets,
+$$ \lambda_j = -2 + 2\cos(\dfrac{2\pi j}{n}) $$
+The maximum eigenvalues for this are when j=n/2. As shown above, its eigenvector is $$v_n/2= (1,-1,1,-1...)$$
+This makes sense as to what is going on. Edge detection tries to separate low frequency changes from high frequency changes. Edges occur at a high frequency. 
+
+Another interesting thing to note about this operator, is that unlike the bluing operators it has a null space. This null space is anything that does not have a change. A constant color image.
+
+\end{frame}
+
+
 \begin{frame}{Blur + Edge Detection}
-One can combine these operations to find the major edges in an image. Bellow are using Sobel edge detection.
+One can combine these operations to find the major edges in an image. Bellow are using Sobel edge detection. 
+
 
 \begin{figure}[ht]
 \includegraphics[width=1.3in]{churchout.jpg}
@@ -402,8 +417,9 @@ One can combine these operations to find the major edges in an image. Bellow are
 \end{figure}
 \end{frame}
 
-\begin{frame}
-Questions?
+\begin{frame}{Questions}
+We hoped you you have enjoyed this presentation.
+Questions
 \end{frame}
 
 
