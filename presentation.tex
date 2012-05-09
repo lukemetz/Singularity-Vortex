@@ -341,8 +341,7 @@ Another application of convolution is edge detection. The Sobel operator can be 
 \end {frame}
 
 \begin{frame}{Sobel Kernel}
-The kernel used to create this edge detection is in two parts:
-
+The kernel used to create this edge detection is in two parts:\newline
 
 $K_X = \begin{pmatrix}
 	-1 & 0 & 1\\
@@ -353,10 +352,26 @@ $K_Y = \begin{pmatrix}
 	-1 & -2 & -1\\
 	0 & 0 & 0\\
 	1 & 2 & 1\\
-\end{pmatrix}$
+\end{pmatrix}$\newline
 
-\vspace{.4in}
+Where $G_{x}$ is how quickly the colors change in the x direction and $G_{y}$ is in the y direction.
+%\vspace{.4in}
+\newline
+
 $E = \sqrt(E_Y^2+E_Y^2)$ Where $E_X$ and $E_Y$ are the result of the convolution.
+\end{frame}
+
+\begin{frame}{Example of $G_{x}$ and $G_{y}$ Output}
+
+After $G_{x}$ and $G_{y}$ are convolved with every element in the image matrix the output looks like:
+
+\begin{figure}[ht]
+\includegraphics[width= 1.4 in]{churchx.jpg}
+\hspace{0.5 in}
+\includegraphics[width= 1.4 in]{churchy.jpg}
+\caption{$G_{x}$ and $G_{y}$ respectively}
+\end{figure}
+
 \end{frame}
 
 \begin{frame}{Laplacian kernel}
