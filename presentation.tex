@@ -185,7 +185,7 @@ Our next feature that we implemented was color controls per channel. This would 
 
 \begin{frame}{Convolution}
 
-Convolution is apply‌g one function to another to construct an output of the system. 
+Convolution is applyâg one function to another to construct an output of the system. 
 \newline
 
 \begin{figure}
@@ -229,7 +229,7 @@ This matrix is in the form of a Circulant matrix. Matrices in this form are easy
 
 
 \begin{frame}{Eigen Things}
-Because this matrix is Circulant, its eigen vectors and values are easy to find. 
+Because this matrix is Circulant, its eigenvectors and values are easy to find. 
 Assuming the following circulant matrix, 
 $$\begin{matrix}
 	c_0 & c_{n-1} & \cdots & c_2 & c_1\\
@@ -238,7 +238,7 @@ $$\begin{matrix}
 	c_{n-2} &   & \ddots & \ddots & c_{n-1}\\
 	c_{n-1} & c_{n-2} & \cdots & c_1 & c_0\\
 \end{matrix}$$
-The eigen values and vectors are:
+The eigenvaluess and vectors are:
 $$\lambda_j =c_0+c_{n-1}w_j	+c_{n-2}w_j^2+...+c_{1}w_j{n-1}2$$
 $$v_j = (1, w_j, w_j^2, w_j^3, ..., w_j^{n-1})$$
 
@@ -255,14 +255,14 @@ we can say $(n-1) = -1$ to simplify because we multiplying by $2\pi$. Thus
 $$\lambda_j = 1+e^{\dfrac{2\pi i j}{n}}+e^{\dfrac{-\pi i j}{n}}$$
 Using eulers formula
 $$\lambda_j = 1+2\cos(\dfrac{2\pi j}{n})$$
-$$\lambda_{0} = 3$$ is the maximum eigen value.
+$$\lambda_{0} = 3$$ is the maximum eigenvalues.
 This value corresponds to $v_0 = (1,1,1,1,1...)$.
 Take for example $\lambda_{n/2} = -1$.  $v_{n/2} = (1,-1,-1,1,-1...)$.
 
 \end{frame}
 
 \begin{frame}{What this Means?}
-One can look at this filter and see that it is a form of blur. It takes the two values next to a point and adds them.  This also multiplies the magnitude of the list by 3, hence an eigen value of 3. This eigen value coresponds to a very low frequency. The smallest eigen values, $\lambda_{n/2} = -1$ corresponds to the highest frequency. The blur is passing through low frequencies and reducing high frequencies.
+One can look at this filter and see that it is a form of blur. It takes the two values next to a point and adds them.  This also multiplies the magnitude of the list by 3, hence an eigenvalues of 3. This eigenvalues coresponds to a very low frequency. The smallest eigenvaluess, $\lambda_{n/2} = -1$ corresponds to the highest frequency. The blur is passing through low frequencies and reducing high frequencies.
 \end{frame}
 
 \begin{frame}{Convolution in 2d}
@@ -321,8 +321,8 @@ $$ G(x) = \dfrac{1}{\sqrt{2\pi \sigma^2}}e^{\dfrac{-x^2}{2\sigma^2}}$$
 \end{frame}
 
 
-\begin{frame} {Eigen values}
-Because this kernel also preforms a form of bluring operation, and is of a similar form as the blur above, we know that its dominant eigen value is $\lambda_0$ which corresponds to a low frequency. And low eigen values, $\lambda_{n/2}$ corresponds to high frequency.
+\begin{frame} {eigenvaluess}
+Because this kernel also preforms a form of bluring operation, and is of a similar form as the blur above, we know that its dominant eigenvalues is $\lambda_0$ which corresponds to a low frequency. And low eigenvaluess, $\lambda_{n/2}$ corresponds to high frequency.
 \end{frame}
 
 
@@ -393,6 +393,21 @@ $K_L = \begin{pmatrix}
 \includegraphics[width=1.4in]{churchoutlaplace.jpg}
 \hspace{.1in}
 \end{figure}
+\end{frame}
+
+\begin{frame}{Laplacian in 1d}
+\begin{figure}[ht]
+\includegraphics[width=3in]{discreteLaplacian.png}
+\end{figure}
+
+The kernel for this is simply [1, -2, 1].
+\end{frame}
+
+\begin{frame}
+The eigenvalues for this kernel is $$ \lambda_j = -2 + 2\cos(\dfrac{2\pi j}{n}) $$. As one can see here, the dominant eigenvalue is when $j=n/2$. This will yeild an eigenvector of 
+$$v_{n/2} = (1,-1,1,-1, ...)$$
+
+This makes a lot of sense when thinking about what edge detection does. It looks to places with very large, fast, high frequency changes in color and keeps those. It lowers all parts that are at low frequency, j=0, $\lambda_j = 0$, $v_0 = (1,1,1,1,...)$
 
 \end{frame}
 
@@ -410,8 +425,10 @@ One can combine these operations to find the major edges in an image. Bellow are
 \end{figure}
 \end{frame}
 
-\begin{frame}
-Questions?
+\begin{frame}{Questions}
+Hope you enjoyed our presentation. 
+
+Any questions?
 \end{frame}
 
 
