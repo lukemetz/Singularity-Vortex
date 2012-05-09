@@ -171,18 +171,105 @@ $A$
 \end{frame}
 
 
+\begin{frame}{Color}
+Our next feature that we implemented was color controls per channel. This would let us control how much of one color there is as well as increase or decreases brightness, changing all channels. This can be done by simply adding values to the matrix at each channel.
 
+\begin{figure}[ht]
+\includegraphics[width=1.4in]{parrot.jpg}
+\hspace{.1in} 
+\includegraphics[width=1.4in]{parrotout1.jpg}
+\hspace{.1in}
+\includegraphics[width=1.4in]{parrotout2.jpg}
+\hspace{.1in}
+\caption{In order from left to right, original image, red increased with green and blue decreased, all channels decreased.}
+\end{figure}
+\end{frame}
 
 \begin{frame}{Convolution}
 'Blending' two functions together. For discrete data, its like overlapping.
 One has original data and a kernel which represents the other function. 
+
+
+\end{frame}
+
+\begin{frame} {Convolution in 1d}
+In 1d, one can think of super imposing the kernel over each point of data.
+$$A = (0,2,3,1,2,1,0)$$
+$$K = (1,1,1)$$ 
+$$O = A*K = (2,5,6,6,4,3,1)$$
+
+Or Mathematically for a kernel of size 3, $O_n = A_{n-1}*K_{0}+A_{n}*K_{1}+A_{n+1}*K_{2}$
+
+Because our vectors are not infinite, we have to decide what happens on the edges. We will assume that the $A_{-1} = A_{n-1}$ where n is the size of the vector.
+\end{frame}
+
+
+\begin{frame}{Multiplying Matrices}
+Convolution around a kernel is a linear operator, thus one can find a matrix, $C$, that transforms A to O. $CA=O=A*K$.
+
+$C = \begin{pmatrix}
+	1 & 1 & 0 & 0 & 0 & 0 & 1\\
+	1 & 1 & 1 & 0 & 0 & 0 & 0\\
+	0 & 1 & 1 & 1 & 0 & 0 & 0\\
+	0 & 0 & 1 & 1 & 1 & 0 & 0\\
+	0 & 0 & 0 & 1 & 1 & 1 & 0\\
+	0 & 0 & 0 & 0 & 1 & 1 & 1\\
+	1 & 0 & 0 & 0 & 0 & 1 & 1\\
+\end{pmatrix}$
+
+This matrix is in the form of a Circulant matrix. Matrices in this form are easy to analyze.
+
+\end{frame}
+
+
+\begin{frame}{Eigen Things}
+Because this matrix is Circulant, its eigen vectors and values are easy to find. 
+Assuming the following circulant matrix, 
+$$\begin{matrix}
+	c_0 & c_{n-1} & \cdots & c_2 & c_1\\
+	c_1 & c_0 & c_{n-1} &  & c_2\\
+	\vdots & c_1 & c_0 & \ddots & \vdots\\
+	c_{n-2} &   & \ddots & \ddots & c_{n-1}\\
+	c_{n-1} & c_{n-2} & \cdots & c_1 & c_0\\
+\end{matrix}$$
+The eigen values and vectors are:
+$$\lambda_j =c_0+c_{n-1}w_j	+c_{n-2}w_j^2+...+c_{1}w_j{n-1}2$$
+$$v_j = (1, w_j, w_j^2, w_j^3, ..., w_j^{n-1})$$
+
+Where $w$ are the roots of unity, $z^n = 1$ or 
+$$w_j = e^{\dfrac{2\pi i j}{n}}$$
+
+\end{frame}
+
+\begin{frame}{Eigen Things, cont}
+For our demo kernel,
+$$\lambda_j = 1+e^{\dfrac{2\pi i j}{n}}+e^{\dfrac{(n-1)\pi i j}{n}}$$
+
+we can say $(n-1) = -1$ to simplify because we multiplying by $2\pi$. Thus   
+$$\lambda_j = 1+e^{\dfrac{2\pi i j}{n}}+e^{\dfrac{-\pi i j}{n}}$$
+Using eulers formula
+$$\lambda_j = 1+2\cos(\dfrac{2\pi j}{n})$$
+$$\lambda_{0} = 3$$ is the maximum eigen value.
+This value corresponds to $v_0 = (1,1,1,1,1...)$.
+Take for example $\lambda_{n/2} = -1$.  $v_{n/2} = (1,-1,-1,1,-1...)$.
+
+\end{frame}
+
+\begin{frame}{What this Means?}
+One can look at this filter and see that it is a form of blur. It takes the two values next to a point and adds them.  This also multiplies the magnitude of the list by 3, hence an eigen value of 3. This eigen value coresponds to a very low frequency. The smallest eigen values, $\lambda_{n/2} = -1$ corresponds to the highest frequency. The blur is passing through low frequencies and reducing high frequencies.
+\end{frame}
+
+\begin{frame}{Convolution in 2d}
+One can extend the above by thinking about an image as a flat vector. This makes it quite hard to think about kernels that act in both x and y. This is why 2d convolution makes a lot of sense.
 \begin{figure}[htp]
 \centering
 \includegraphics[width=2in]{conv2d_matrix.jpg}
 \caption{Convolution in 2D.}
 \label{}
 \end{figure}
+Doing this allows for a much more concise way to write down convolution kernels.
 \end{frame}
+
 
 \begin{frame}{Gaussian Blur}
 
@@ -213,9 +300,25 @@ Gaussian blur is an application of  convolution. It 'blends' a Gaussian, a norma
 \includegraphics[width=1.3in]{churchoutblur2.jpg}
 \caption{Original image on left. $\sigma$ = 2 in middle. $\sigma$ = 4 on left.}
 \end{figure}
-
-
 \end{frame}
+
+\begin{frame}{Gaussian Function}
+The Gaussian function in 2d is:
+$$G(x,y) = \dfrac{1}{2\pi \sigma^2}e^{-\dfrac{x^2+y^2}{2 \sigma^2}}$$
+
+In 1d it is:
+$$ G(x) = \dfrac{1}{\sqrt{2\pi \sigma^2}}e^{\dfrac{-x^2}{2\sigma^2}}$$
+
+\begin{figure}[ht]
+\includegraphics[width=2.4in]{gauss.png}
+\end{figure}
+\end{frame}
+
+
+\begin{frame} {Eigen values}
+Because this kernel also preforms a form of bluring operation, and is of a similar form as the blur above, we know that its dominant eigen value is $\lambda_0$ which corresponds to a low frequency. And low eigen values, $\lambda_{n/2}$ corresponds to high frequency.
+\end{frame}
+
 
 \begin{frame}{Sobel Edge Detection}
 Another application of convolution is edge detection. The Sobel operator can be thought of as a discrete differentiation operator. It gets how fast one color goes to another. 
@@ -273,7 +376,7 @@ $K_L = \begin{pmatrix}
 \end{frame}
 
 \begin{frame}{Blur + Edge Detection}
-One can combine these operations to find the major edges in an image. Bellow are using sobel edge detection.
+One can combine these operations to find the major edges in an image. Bellow are using Sobel edge detection.
 
 \begin{figure}[ht]
 \includegraphics[width=1.3in]{churchout.jpg}
@@ -284,22 +387,12 @@ One can combine these operations to find the major edges in an image. Bellow are
 \hspace{.1in}
 \caption{No Blur, Blur, $\sigma = 2$, $\sigma = 4$}
 \end{figure}
-
 \end{frame}
 
-\begin{frame}{Color}
-Our next feature that we implemented was color controls per channel. This would let us control how much of one color there is as well as increase or decreases brightness, changing all channels. This can be done by simply adding values to the matrix at each channel.
+\begin{frame}
+Questions?
+\end{Frame}
 
-\begin{figure}[ht]
-\includegraphics[width=1.4in]{parrot.jpg}
-\hspace{.1in} 
-\includegraphics[width=1.4in]{parrotout1.jpg}
-\hspace{.1in}
-\includegraphics[width=1.4in]{parrotout2.jpg}
-\hspace{.1in}
-\caption{In order from left to right, original image, red increased with green and blue decreased, all channels decreased.}
-\end{figure}
 
-\end{frame}
 
 \end{document}

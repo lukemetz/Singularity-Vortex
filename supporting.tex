@@ -10,7 +10,7 @@
 \maketitle
 
 \section{Abstract}
-Our group chose to use our existing knowledge of linear algebra and apply it to the field of image processing We chose to package our end result as a simple python module. Our system can apply a linear transformation(s) to and image of any size. It is capable of rotating, scaling and other simple manipulations. In addition, our system can do convolution based operations like Sobel edge detection, Laplacian edge detection and Gauss blur. We also have various color manipulating functions like saturation, brightness and grayscale adjustment.
+Our group chose to use our existing knowledge of linear algebra and differential equations and apply it to the field of image processing. Our system is a python module that can apply a linear transformations to an image of any size. It is capable of rotating, scaling, and changing the color balance of images. In addition, we looked into convolution based operations like Sobel edge detection, Laplacian edge detection and Gaussian blur.
 
 \section{Functionality}
 \subsection{Translation Matrix}
@@ -106,7 +106,7 @@ where c is your convolution kernel.
 Because this matrix follows a specific form, its eigen values and vectors are defined and in a specific form.
 
 $$v_j = (1, w_j, w_j^2, w_j^3, ..., w_j^{n-1})$$
-c
+$$\lambda_j =c_0+c_{n-1}w_j	+c_{n-2}w_j^2+...+c_{1}w_j{n-1}2$$
 
 Where $w$ are the roots of unity,
 $$w_j = e^{\dfrac{2\pi i j}{n}}$$
@@ -279,6 +279,8 @@ http://amazing-creature.blogspot.com/2011/08/20-cute-bunny-pictures.html
 %http://blog.lib.umn.edu/cgi-bin/mt-search.cgi?blog_id=15490&tag=bird%20language%20communication%20name%20names%20song%20songs%20parrot%20parrots%20finch%20finches&limit=10
 
 http://www.math.ucf.edu/~xli/ConvolutionInImageProcessing2011print.pdf
+
+%http://homepages.inf.ed.ac.uk/rbf/HIPR2/gsmooth.htm
 
 Wikipedia:
 convolution
